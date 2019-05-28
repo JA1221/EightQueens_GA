@@ -6,7 +6,8 @@ class EightQueens_GA{
 	static final int boardNum = 100;
 	static final int POP_len = 10;
 	static table POP[] = new table[POP_len];
-	static int mutateP = 30;
+	static int mutateP = 50;
+	static int mutateN = 0;
 
 //crossOver new物件 = 物件x前 + 物件y後
 	static table crossOver(table x, table y){
@@ -20,6 +21,7 @@ class EightQueens_GA{
 		}
 		//機率性 隨機一個位置突變
 		if((int)(Math.random()*100) < mutateP){
+			mutateN++;
 			int mutate = (int)(Math.random()*boardNum);
 
 			board[mutate] = (int)(Math.random()*boardNum);
@@ -49,9 +51,9 @@ class EightQueens_GA{
 		boolean ansFlag = false;
 
 		while(!ansFlag){
-			System.out.println("Generation:" + Generation);
+			mutateN = 0;
 
-			table newPOP[] = new table[POP_len*(POP_len-1)];//建立新群體
+			table newPOP[] = new table[POP_len*(POP_len-1)];//建立新群體 n*(n*1)
 			int address = 0;
 			
 			//當衝突數==0 解出
@@ -79,6 +81,8 @@ class EightQueens_GA{
 			for(int i = 0; i < POP_len; i ++)
 				POP[i] = newPOP[i];
 
+			System.out.print("Generation:" + Generation);
+			System.out.println(" <-> mutate:" + mutateN + ", Best:" + POP[0].conflictAll());
 			Generation++;
 		}
 
