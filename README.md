@@ -1,2 +1,2 @@
 # EightQueens_GA
-�ϥΰ�]�t��k
+八皇后 基因演算法(Genetic Algorithm)
